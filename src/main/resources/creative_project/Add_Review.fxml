@@ -11,11 +11,11 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creative_project.Add_Review">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="406.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creative_project.Add_Review">
 
     <children>
-        <Label layoutX="283.0" layoutY="29.0" text="이용내역" AnchorPane.bottomAnchor="356.6" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="269.0" AnchorPane.topAnchor="29.0" />
-        <TabPane fx:id="tp_use_list" layoutX="186.0" layoutY="88.0" prefHeight="209.0" prefWidth="248.0" tabClosingPolicy="UNAVAILABLE">
+        <Label layoutX="281.0" layoutY="6.0" text="이용내역" AnchorPane.bottomAnchor="379.6" AnchorPane.leftAnchor="281.0" AnchorPane.rightAnchor="271.0" AnchorPane.topAnchor="6.0" />
+        <TabPane fx:id="tp_use_list" layoutX="184.0" layoutY="65.0" prefHeight="209.0" prefWidth="248.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="tab_playland" text="관광지">
                     <content>
@@ -47,11 +47,11 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <Label layoutX="188.0" layoutY="303.0" text="평점" />
-        <Label layoutX="187.0" layoutY="331.0" text="후기" />
-        <TextArea fx:id="ta_use_review" layoutX="217.0" layoutY="330.0" prefHeight="87.0" prefWidth="157.0" />
-        <Button fx:id="btn_add_use_list" layoutX="384.0" layoutY="393.0" mnemonicParsing="false" onAction="#add_use_list" prefHeight="22.0" prefWidth="48.0" text="등록" />
-      <MenuButton fx:id="mb_score" layoutX="217.0" layoutY="299.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="69.0" text="선택">
+        <Label layoutX="186.0" layoutY="280.0" text="평점" />
+        <Label layoutX="185.0" layoutY="308.0" text="후기" />
+        <TextArea fx:id="ta_use_review" layoutX="215.0" layoutY="307.0" prefHeight="87.0" prefWidth="157.0" />
+        <Button fx:id="btn_add_use_list" layoutX="382.0" layoutY="370.0" mnemonicParsing="false" onAction="#add_use_list" prefHeight="22.0" prefWidth="48.0" text="등록" />
+      <MenuButton fx:id="mb_score" layoutX="215.0" layoutY="276.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="69.0" text="선택">
         <items>
           <MenuItem fx:id="menu_1" mnemonicParsing="false" onAction="#add_1" text="1점" />
           <MenuItem fx:id="menu_2" mnemonicParsing="false" onAction="#add_2" text="2점" />
