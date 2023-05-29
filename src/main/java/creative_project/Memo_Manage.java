@@ -2,11 +2,7 @@ package creative_project;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 
 public class Memo_Manage {
 
@@ -42,7 +38,15 @@ public class Memo_Manage {
     @FXML
     private TableView<?> tv_memo;
 
-    // 메모 등록 버튼 메소드
+    // 저장된 메모정보 중 날짜를 보여주는 곳
+    @FXML
+    private TextField tf_view_date;
+
+    // 저장된 메모정보 중 메모 내용을 보여주는 곳
+    @FXML
+    private TextArea ta_view_memo;
+
+    // 메모 추가 버튼 메소드
     @FXML
     void addMemo(ActionEvent event) {
 

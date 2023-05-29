@@ -6,38 +6,51 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="357.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creative_project.Memo_Manage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creative_project.Memo_Manage">
 <children>
-      <TextArea fx:id="ta_Memo" layoutX="93.0" layoutY="136.0" prefHeight="180.0" prefWidth="156.0" />
-<Label layoutX="14.0" layoutY="143.0" text="메모내용 : ">
+      <TextArea fx:id="ta_Memo" layoutX="79.0" layoutY="136.0" prefHeight="199.0" prefWidth="133.0" />
+<Label layoutX="13.0" layoutY="137.0" text="메모내용 : ">
    <font>
       <Font size="13.0" />
    </font>
 </Label>
-      <DatePicker fx:id="dp_memo" layoutX="93.0" layoutY="71.0" prefHeight="24.0" prefWidth="156.0" />
-      <Button fx:id="mb_Add" ellipsisString="" layoutX="208.0" layoutY="324.0" mnemonicParsing="false" onAction="#addMemo" text="저장" />
+      <DatePicker fx:id="dp_memo" layoutX="78.0" layoutY="71.0" prefHeight="24.0" prefWidth="134.0" />
+      <Button fx:id="mb_Add" ellipsisString="" layoutX="172.0" layoutY="342.0" mnemonicParsing="false" onAction="#addMemo" text="추가" />
 <Label layoutX="40.0" layoutY="75.0" text="날짜 : ">
    <font>
       <Font size="13.0" />
    </font>
 </Label>
-<Button fx:id="mb_Modify" ellipsisString="" layoutX="627.0" layoutY="324.0" mnemonicParsing="false" onAction="#modifyMemo" text="수정" />
+<Button fx:id="mb_Modify" ellipsisString="" layoutX="670.0" layoutY="312.0" mnemonicParsing="false" onAction="#modifyMemo" text="수정" />
       <Label layoutX="310.0" layoutY="14.0" text="일정 관리">
    <font>
       <Font size="28.0" />
    </font>
 </Label>
-      <Line endX="-100.00003051757812" endY="247.80001831054688" layoutX="382.0" layoutY="69.0" startX="-100.00003051757812" startY="0.5999984741210938" stroke="#9c9797" strokeWidth="2.0" />
-<Button fx:id="mb_delete" layoutX="678.0" layoutY="324.0" mnemonicParsing="false" onAction="#deleteMemo" text="삭제" />
-      <TableView fx:id="tv_memo" layoutX="314.0" layoutY="69.0" prefHeight="248.0" prefWidth="404.0">
+      <Line endX="-100.00003051757812" endY="300.6000061035156" layoutX="329.0" layoutY="69.0" startX="-100.00003051757812" startY="0.5999984741210938" stroke="#9c9797" strokeWidth="2.0" />
+<Button fx:id="mb_delete" layoutX="670.0" layoutY="344.0" mnemonicParsing="false" onAction="#deleteMemo" text="삭제" />
+      <TableView fx:id="tv_memo" layoutX="246.0" layoutY="69.0" prefHeight="199.0" prefWidth="466.0">
         <columns>
-          <TableColumn fx:id="tc_date" prefWidth="109.5999755859375" text="날짜" />
-          <TableColumn fx:id="tc_memo" prefWidth="292.0000305175781" text="메모내용" />
+          <TableColumn fx:id="tc_date" prefWidth="103.20001220703125" text="날짜" />
+          <TableColumn fx:id="tc_memo" prefWidth="360.79998168945315" text="메모내용" />
         </columns>
       </TableView>
+      <Label layoutX="270.0" layoutY="287.0" text="날짜 : ">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="244.0" layoutY="315.0" text="메모내용 : ">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tf_view_date" layoutX="308.0" layoutY="284.0" prefHeight="22.0" prefWidth="109.0" />
+      <TextArea fx:id="ta_view_memo" layoutX="308.0" layoutY="312.0" prefHeight="56.0" prefWidth="350.0" />
 </children>
 </AnchorPane>
