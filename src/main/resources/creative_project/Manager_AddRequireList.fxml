@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"  prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creative_project.Manager_AddRequireList">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creative_project.Manager_AddRequireList">
     <children>
-        <TabPane layoutX="31.0" layoutY="23.0" prefHeight="297.0" prefWidth="542.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="tp_add_requireList" layoutX="31.0" layoutY="23.0" prefHeight="297.0" prefWidth="542.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="tb_touristSpot_require" text="관광지">
                     <content>
@@ -17,9 +17,9 @@
                      <children>
                         <TableView fx:id="tv_touristSpot_require" prefHeight="264.0" prefWidth="542.0">
                           <columns>
-                            <TableColumn fx:id="tc_touristSpot_name" prefWidth="75.0" text="관광지 이름" />
-                            <TableColumn fx:id="tc_touristSpot_address" prefWidth="116.0" text="주소" />
-                              <TableColumn fx:id="tc_touristSpot_why" prefWidth="350.0" text="추천 이유" />
+                            <TableColumn fx:id="tc_touristSpot_name" prefWidth="108.0" text="관광지 이름" />
+                            <TableColumn fx:id="tc_touristSpot_address" prefWidth="240.0" text="주소" />
+                              <TableColumn fx:id="tc_touristSpot_why" prefWidth="193.0" text="추천 이유" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -31,9 +31,9 @@
                      <children>
                         <TableView fx:id="tv_restaurant_require" prefHeight="271.0" prefWidth="542.0">
                           <columns>
-                            <TableColumn fx:id="tc_restaurant_name" prefWidth="82.0" text="상호명" />
-                            <TableColumn fx:id="tc_restaurant_address" prefWidth="125.0" text="주소" />
-                              <TableColumn fx:id="tc_restaurant_why" prefWidth="334.0" text="추천 이유" />
+                            <TableColumn fx:id="tc_restaurant_name" prefWidth="105.0" text="상호명" />
+                            <TableColumn fx:id="tc_restaurant_address" prefWidth="218.0" text="주소" />
+                              <TableColumn fx:id="tc_restaurant_why" prefWidth="218.0" text="추천 이유" />
                           </columns>
                         </TableView>
                      </children></AnchorPane>
@@ -41,6 +41,6 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <Button fx:id="bt_require_allow" layoutX="510.0" layoutY="346.0" mnemonicParsing="false" text="추가" />
+        <Button fx:id="bt_require_allow" layoutX="510.0" layoutY="346.0" mnemonicParsing="false" onAction="#add_require" text="추가" />
     </children>
 </AnchorPane>

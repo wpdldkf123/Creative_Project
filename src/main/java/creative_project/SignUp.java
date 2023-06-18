@@ -5,17 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import persistence.MyBatisConnectionFactory;
+import persistence.dao.userDAO;
+import persistence.dto.userDTO;
 
-public class SignUp
-{
+public class SignUp {
 
     @FXML
     private TextField tf_id;
@@ -47,10 +44,10 @@ public class SignUp
     @FXML
     private TextField tf_phone_admin;
     @FXML
-    private MenuButton mb_gender;
+    private ComboBox cb_gender;
 
     @FXML
-    private MenuButton mb_gender_admin;
+    private ComboBox mb_gender_admin;
     @FXML
     private MenuItem mi_male;
 
@@ -74,24 +71,24 @@ public class SignUp
 
     @FXML
     private Button btn_back;
-    // 성별 선택
-    @FXML
-    void setFemale(ActionEvent event)
-    {
-        mb_gender.setText(mi_female.getText());
-    }
 
-    @FXML
-    void setMale(ActionEvent event)
-    {
-        mb_gender.setText(mi_male.getText());
-    }
+    // 성별 선택
+//    @FXML
+//    void setFemale(ActionEvent event) {
+//        cb_gender.setText(mi_female.getText());
+//    }
+//
+//    @FXML
+//    void setMale(ActionEvent event) {
+//        cb_gender.setText(mi_male.getText());
+//    }
+
     @FXML
     void backMain(ActionEvent event) {
         loadPage("Login");
     }
-    public void loadPage(String file_name)
-    {
+
+    public void loadPage(String file_name) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(file_name + ".fxml"));
             Scene scene = new Scene(root);
@@ -102,69 +99,81 @@ public class SignUp
             e.printStackTrace();
         }
     }
+
     // 회원가입 시도
     @FXML
-    void trySignUp(ActionEvent event)
-    {
-        try
-        {
-            t_result.setText("");
-            String id = tf_id.getText();
-            String nickname = tf_nickname.getText();
-            String passwd = pf_passwd.getText();
-            String name = tf_name.getText();
-            String phone_number = tf_phone.getText();
-            String birth = dp_birth.getValue().toString();
-            String gender;
+    void trySignUp(ActionEvent event) {
 
-            // 성별에 따라 gender 값 세팅
-            if (mb_gender.getText().equals("남"))
-                gender = "1";
-            else
-                gender = "0";
+        userDTO user = new userDTO();
 
-            // 회원가입 요청
-//            mainGUI.writePacket(Protocol.PT_REQ_RENEWAL + "`" + Protocol.CS_REQ_SIGNUP + "`2`" + id + "`" + passwd + "`" + name + "`" + phone_number + "`" + birth + "`" + gender);
+        userDAO user2 = new userDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+        t_result.setText("");
+        user.setLogId(tf_id.getText());
 
-            while (true)
-            {
-//                String packet = mainGUI.readLine(); // 요청 응답 수신
-//                if (packet.equals(Protocol.PT_REQ_LOGIN_INFO)) // 접속 시 서버에서 보내는 로그인 요청 프로토콜 무시하기 위해
-//                    continue;
-//                String packetArr[] = packet.split("`"); //패킷 분할
-//                String packetType = packetArr[0];
-//                String packetCode = packetArr[1];
 
-//                if (packetType.equals(Protocol.PT_RES_RENEWAL) && packetCode.equals(Protocol.SC_RES_SIGNUP))
-//                {
-//                    String result = packetArr[2];  // 요청 결과
-//                    switch (result)
-//                    {
-//                        case "1": // 요청 성공 시 로그인 화면으로 전환
-//                            mainGUI.alert("회원가입 완료", "확인을 누르시면 로그인 화면으로 전환됩니다!");
-//                            Parent root = FXMLLoader.load(getClass().getResource("SignUp.fxml"));
-//                            Scene scene = new Scene(root, 600, 400);
-//                            Stage primaryStage = (Stage) btn_sign_up.getScene().getWindow();
-//                            primaryStage.setTitle("로그인");
-//                            primaryStage.setResizable(false);
-//                            primaryStage.setScene(scene);
-//                            primaryStage.show();
-//                            return;
-//                        case "2": // 요청 실패
-//                            mainGUI.alert("회원가입 실패", "회원가입 실패! 아이디가 중복됩니다!");
-//                            return;
-//                    }
-//                }
-            }
-        }
-        catch (Exception e)
-        {
-            mainGUI.alert("회원가입 실패", "회원가입 실패! 알맞은 정보를 입력했나요?");
-            e.printStackTrace();
+        mainGUI mainGUI = new mainGUI();
+
+        user.setLogPw(pf_passwd.getText());
+        user.setName(tf_name.getText());
+        user.setDigit(tf_phone.getText());
+        user.setBirth(dp_birth.getValue());
+        user.setAuth(0);
+
+        int gender;
+        // 성별에 따라 gender 값 세팅
+        if (cb_gender.getValue().equals("남"))
+            gender = 1;
+        else
+            gender = 0; //0 이 여자
+
+        user.setSex(gender);
+        user.setNickname(tf_nickname.getText());
+        boolean exists = user2.idTest(tf_id.getText());
+        if (exists) {
+            mainGUI.alert("아이디에러", "이미 같은 아이디가 존재합니다.");
+        } else {
+            user2.SignUp(user);
+            mainGUI.alert("회원가입 완료", "회원가입이 완료되었습니다.");
+            // 회원가입 완료 후 확인 버튼을 누르면 메인화면으로 돌아감
+            // mainGUI 메인화면으로 돌아가는 로직을 추가해야 함
         }
     }
     @FXML
-    void trySignUpAdmin(ActionEvent event) {
+    public void trySignUpAdmin(ActionEvent event){
+        userDTO user = new userDTO();
 
+        userDAO user2 = new userDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+        t_result.setText("");
+        user.setLogId(tf_id_admin.getText());
+
+
+        mainGUI mainGUI = new mainGUI();
+
+        user.setLogPw(pf_passwd_admin.getText());
+        user.setName(tf_name_admin.getText());
+        user.setDigit(tf_phone_admin.getText());
+        user.setBirth(dp_birth_admin.getValue());
+        user.setNickname(tf_nickname_admin.getText());
+        user.setAuth(1);
+
+        int gender;
+        // 성별에 따라 gender 값 세팅
+        if (mb_gender_admin.getValue().equals("남"))
+            gender = 1;
+        else
+            gender = 0; //0 이 여자
+
+        user.setSex(gender);
+
+        boolean exists = user2.idTest(tf_id_admin.getText());
+        if (exists) {
+            mainGUI.alert("아이디에러", "이미 같은 아이디가 존재합니다.");
+        } else {
+            user2.SignUp(user);
+            mainGUI.alert("관리자 회원가입 완료", "회원가입이 완료되었습니다.");
+            // 회원가입 완료 후 확인 버튼을 누르면 메인화면으로 돌아감
+            // mainGUI 메인화면으로 돌아가는 로직을 추가해야 함
+        }
     }
-}
+    }
+

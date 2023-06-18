@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -21,10 +20,10 @@
                         <Font size="30.0" />
                     </font>
                 </Text>
-                <ToolBar layoutX="332.0" layoutY="87.0" prefHeight="45.0" prefWidth="360.0" style="-fx-background-color: #E0E0E0;">
-                    <items>
-                        <AnchorPane prefHeight="30.0" prefWidth="346.0">
-                            <children>
+            <ToolBar layoutX="332.0" layoutY="87.0" prefHeight="45.0" prefWidth="360.0" style="-fx-background-color: #E0E0E0;">
+              <items>
+                  <AnchorPane prefHeight="30.0" prefWidth="346.0">
+                     <children>
                                 <MenuButton fx:id="mb_member_function" alignment="BOTTOM_RIGHT" layoutX="239.0" layoutY="4.0" mnemonicParsing="false" style="-fx-background-color: transparent;" text="회원기능">
                                     <items>
                                         <MenuItem fx:id="menu_add_review" mnemonicParsing="false" onAction="#add_review" text="후기 등록" />
@@ -33,35 +32,28 @@
                                         <MenuItem fx:id="menu_require_modify" mnemonicParsing="false" onAction="#require_modify" text="맛집 / 관광지 수정/삭제 요청" />
                                         <MenuItem fx:id="menu_recommend" mnemonicParsing="false" onAction="#view_recommend" text="지역별 맛집/관광지 추천" />
                                     </items>
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
                                 </MenuButton>
-                                <Button fx:id="btn_food" layoutX="28.0" layoutY="4.0" mnemonicParsing="false" onAction="#view_food" style="-fx-background-color: #E0E0E0;" text="맛집">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font></Button>
-                                <Button fx:id="btn_playland" layoutX="133.0" layoutY="4.0" mnemonicParsing="false" onAction="#view_playland" style="-fx-background-color: #E0E0E0;" text="관광지">
-                                    <font>
-                                        <Font size="14.0" />
-                                    </font></Button>
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </ToolBar>
-                <Button fx:id="btn_logout" layoutX="660.0" layoutY="34.0" mnemonicParsing="false" onAction="#logout" text="로그아웃" />
-                <AnchorPane layoutX="15.0" layoutY="165.0" prefHeight="462.0" prefWidth="982.0">
-                    <children>
-                        <AnchorPane fx:id="ap_user_sub" layoutX="-7.0" layoutY="6.0" maxWidth="968.0" minHeight="341.0" minWidth="668.0" prefHeight="450.0" prefWidth="968.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="6.0">
-                            <children>
-                                <AnchorPane fx:id="ap_user_sub2" layoutX="218.0" layoutY="18.0" prefHeight="414.0" prefWidth="561.0">
-                                    <children>
-                                        <BorderPane fx:id="bp_user_sub" layoutX="13.0" layoutY="13.0" prefHeight="386.0" prefWidth="534.0" />
-                                    </children>
-                                </AnchorPane>
-                            </children></AnchorPane>
-                    </children>
-                </AnchorPane>
+                        <Button fx:id="btn_food" layoutX="28.0" layoutY="4.0" mnemonicParsing="false" onAction="#view_food" style="-fx-background-color: #E0E0E0;" text="맛집">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Button>
+                      <Button fx:id="btn_playland" layoutX="133.0" layoutY="4.0" mnemonicParsing="false" onAction="#view_playland" style="-fx-background-color: #E0E0E0;" text="관광지">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Button>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </ToolBar>
+            <Button fx:id="btn_logout" layoutX="660.0" layoutY="34.0" mnemonicParsing="false" onAction="#logout" text="로그아웃" />
+            <AnchorPane layoutX="15.0" layoutY="165.0" prefHeight="462.0" prefWidth="982.0">
+               <children>
+                      <AnchorPane fx:id="ap_user_sub" layoutX="-7.0" layoutY="6.0" maxWidth="968.0" minHeight="341.0" minWidth="668.0" prefHeight="450.0" prefWidth="968.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="-7.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="6.0" />
+               </children>
+            </AnchorPane>
             </children>
         </AnchorPane>
     </children>

@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -19,10 +18,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import persistence.MyBatisConnectionFactory;
+import persistence.dao.userDAO;
+import persistence.dto.UserInfo;
+import persistence.dto.userDTO;
 
 public class Login
 {
     static public String USER_ID;
+
+
 
     @FXML
     private TextField tf_id;
@@ -96,6 +101,72 @@ public class Login
             e.printStackTrace();
         }
     }
+    @FXML
+    void LoginNormal()
+    {
+        try
+        {
+            // 새로운 윈도우 출력
+            Parent root = FXMLLoader.load(getClass().getResource("User_Main.fxml"));
+            Scene scene = new Scene(root, 1000, 700);
+            Stage primaryStage = (Stage) btn_login.getScene().getWindow();
+            primaryStage.setTitle("사용자");
+            primaryStage.setScene(scene);
+
+            primaryStage.setX((300));
+            primaryStage.setY((50));
+
+            primaryStage.show();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void loginManager()
+    {
+        try
+        {
+            // 새로운 윈도우 출력
+            Parent root = FXMLLoader.load(getClass().getResource("Manager_Main.fxml"));
+            Scene scene = new Scene(root, 1000, 700);
+            Stage primaryStage = (Stage) btn_login.getScene().getWindow();
+            primaryStage.setTitle("사용자");
+            primaryStage.setScene(scene);
+
+            primaryStage.setX((300));
+            primaryStage.setY((50));
+
+            primaryStage.show();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void Login(ActionEvent event){
+        try
+        {
+            // 새로운 윈도우 출력
+            Parent root = FXMLLoader.load(getClass().getResource("User_Main.fxml"));
+            Scene scene = new Scene(root, 1000, 700);
+            Stage primaryStage = (Stage) btn_login.getScene().getWindow();
+            primaryStage.setTitle("사용자");
+            primaryStage.setScene(scene);
+
+            primaryStage.setX((300));
+            primaryStage.setY((50));
+
+            primaryStage.show();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void goManager(ActionEvent event)
@@ -121,70 +192,46 @@ public class Login
     }
 
     // 로그인 시도
-    void loginTry() throws IOException {
-        try {
+    void loginTry() throws IOException
+    {
+        try
+        {
 
-            t_result.setText("");
-            String id = tf_id.getText();
-            String passwd = pf_passwd.getText();
 
-            if (id.isEmpty() || passwd.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("로그인 실패");
-                alert.setHeaderText(null);
-                alert.setContentText("알맞은 정보를 입력했나요?");
-                alert.showAndWait();
-                return;
+            userDAO user = new userDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+            boolean exists = user.idTest(tf_id.getText());
+            if (!exists) {
+                mainGUI.alert("아이디 없음", "아이디가 존재하지않습니다.");
             }
-//            mainGUI.writePacket(Protocol.PT_REQ_LOGIN + "`" + id + "`" + passwd); // 로그인 요청
-//
-            while (true) {
-//                String packet = mainGUI.readLine(); // 로그인 요청 응답 수신
-//                String packetArr[] = packet.split("`"); // 패킷 분할
-//                String packetType = packetArr[0];
-//
-//                switch (packetType)
-//                {
-//                    /*
-//                     * case Protocol.PT_REQ_LOGIN_INFO: // gui에서 값 가져옴 id = tf_id.getText(); passwd = pf_passwd.getText();
-//                     *
-//                     * mainGUI.writePacket(Protocol.PT_REQ_LOGIN + "`" + id + "`" + passwd); return;
-//                     */
-//                    case Protocol.PT_RES_LOGIN:
-//                    {
-//                        String result = packetArr[1]; // 요청 결과
-//
-//                        switch (result)
-//                        {
-//                            case "1": // 관리자 로그인 성공
-//                            {
-//                                startWindow("Admin_main.fxml", "관리자 모드");
-//                                USER_ID = id;
-//                                return;
-//                            }
-//                            case "2": // 사용자 로그인 성공
-//                            {
-//                                startWindow("User_main.fxml", "OutDoorGram");
-//                                USER_ID = id;
-//                                return;
-//                            }
-//                            case "3": // 로그인 실패
-//                            {
-//                                t_result.setText("로그인 실패!");
-//                                return;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            else {
+                boolean result = user.pwTest(tf_id.getText(),pf_passwd.getText());
+                if(result){
+                    mainGUI.alert("로그인 성공!", "");
+
+                    userDAO userDao = new userDAO(MyBatisConnectionFactory.getSqlSessionFactory());
+                    UserInfo.setUser_id(userDao.getPk(tf_id.getText()));
+
+                    int auth = user.getAuth(tf_id.getText());  //권한검증
+                    switch (auth) {
+                        case 0: LoginNormal();
+                            break;
+                        default: loginManager();
+                            break;
+                    }
+
+                }else {
+                    mainGUI.alert("비밀번호 틀림", "비밀번호가 틀렸습니다.");
+                }
             }
+
+//
         }
         catch (Exception e)
         {
             t_result.setText("로그인 실패!");
             e.printStackTrace();
         }
-        }
+    }
 
     // 로그인 성공 시 해당하는 메인으로 넘어감
     private void startWindow(String path, String title) throws Exception

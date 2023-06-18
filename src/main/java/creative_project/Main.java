@@ -5,13 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-//버튼 작동안되는버젼
+
+
+//진짜버젼
 public class Main extends Application {
+    Parent root = null;
     @Override
     public void start(Stage primarystage) throws IOException {
-        Parent root = (Parent) FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         primarystage.setTitle("Outdoorgram");
         primarystage.setScene(new Scene( root ,600, 400));
 
