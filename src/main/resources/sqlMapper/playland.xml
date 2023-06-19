@@ -10,17 +10,35 @@
         <result property="address" column="address"></result>
         <result property="score" column="rate"></result>
         <result property="review" column="content"></result>
+        <result property="reviewCount" column="cnt"></result>
     </resultMap>
     <select id="selectPlayland" resultMap="playland" resultType="String">
-        SELECT pl.spot_id, pl.name, pl.address , pl.sort, rv.rate, rv.content
-        FROM play_land pl
+        SELECT
+        pl.spot_id,
+        pl.name,
+        pl.address,
+        rv.content,
+        ROUND((SELECT AVG(rate) FROM review WHERE spot_id = pl.spot_id), 1) AS rate,
+        (SELECT COUNT(review_id) FROM review WHERE spot_id = pl.spot_id) as cnt
+        FROM
+        play_land pl
         LEFT JOIN (
-            SELECT spot_id, rate, content
-            FROM review
-            WHERE (spot_id, review_date) IN (
-                SELECT spot_id, MAX(review_date)
-                FROM review
-                GROUP BY spot_id)
+        SELECT
+        spot_id,
+        rate,
+        content
+        FROM
+        review
+        WHERE
+        (spot_id, review_date) IN (
+        SELECT
+        spot_id,
+        MAX(review_date)
+        FROM
+        review
+        GROUP BY
+        spot_id
+        )
         ) rv ON pl.spot_id = rv.spot_id
         <where>
             <if test="state != null">

@@ -18,7 +18,7 @@ public class foodDTO {
     private String city;
     private String road;
     private int road_no;
-
+    private int reviewCount;
     public foodDTO(){}
     public foodDTO(String name, String state, String city){
         this.name = name;

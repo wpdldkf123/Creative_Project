@@ -16,6 +16,7 @@ public class playLandDTO {
     private String city;
     private double score;
     private String review;
+    private int reviewCount;
 
     public playLandDTO(){}
     public playLandDTO(String name, String state, String city){
@@ -23,5 +24,4 @@ public class playLandDTO {
         this.state = state;
         this.city = city;
     }
-
 }

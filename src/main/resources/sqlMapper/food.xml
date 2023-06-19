@@ -11,20 +11,38 @@
         <result property="category" column="category"></result>
         <result property="score" column="rate"></result>
         <result property="review" column="content"></result>
+        <result property="reviewCount" column="cnt"></result>
     </resultMap>
 
 
     <select id="selectFood" resultMap="food" resultType="String">
-        SELECT fd.food_id, fd.name, CONCAT(state, ' ', city, ' ', road, ' ', road_no) AS address, fd.category, rv.rate, rv.content
-        FROM food_data fd
+        SELECT
+        fd.food_id,
+        fd.name,
+        CONCAT(state, ' ', city, ' ', road, ' ', road_no) AS address,
+        fd.category,
+        ROUND((SELECT AVG(rate) FROM review WHERE food_id = fd.food_id), 1) AS rate,
+        rv.content,
+        (SELECT COUNT(review_id) FROM review WHERE food_id = fd.food_id) as cnt
+        FROM
+        food_data fd
         LEFT JOIN (
-            SELECT food_id, rate, content
-            FROM review
-            WHERE (food_id, review_date) IN (
-                SELECT food_id, MAX(review_date)
-                FROM review
-                GROUP BY food_id
-            )
+        SELECT
+        food_id,
+        rate,
+        content
+        FROM
+        review
+        WHERE
+        (food_id, review_date) IN (
+        SELECT
+        food_id,
+        MAX(review_date)
+        FROM
+        review
+        GROUP BY
+        food_id
+        )
         ) rv ON fd.food_id = rv.food_id
         <where>
             <if test="state != null">
@@ -37,7 +55,6 @@
                 AND name LIKE CONCAT('%', #{name}, '%')
             </if>
         </where>
-        limit 0,99999
     </select>
 
 

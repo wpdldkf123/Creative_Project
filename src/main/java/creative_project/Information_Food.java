@@ -60,7 +60,8 @@ public class Information_Food {
     private TableView<reviewDTO> tv_selected_review;
     @FXML
     private TableView<foodDTO> tv_information_food;
-
+    @FXML
+    private TableColumn<?, ?> tc_food_reviewCount;
     @FXML
     private TableView<weatherData> tv_information_weather;
 
@@ -76,6 +77,8 @@ public class Information_Food {
     @FXML
     private TableColumn tc_tmx;
 
+    @FXML
+    private Label lb_count_data;
     //테이블 뷰에 디비에서 가져온 맛집 정보 출력
     @FXML
     void view_search_food(ActionEvent event) {
@@ -94,9 +97,11 @@ public class Information_Food {
 //        tc_food_review.setCellValueFactory(new PropertyValueFactory<>("review"));
         tc_food_score.setCellValueFactory(new PropertyValueFactory<>("score"));
         tc_food_category.setCellValueFactory(new PropertyValueFactory<>("category"));
+        tc_food_reviewCount.setCellValueFactory(new PropertyValueFactory<>("reviewCount"));
 
         tv_information_food.setItems(observableFoods);
-
+        int databaseCount = foods.size();
+        lb_count_data.setText("조회된 음식점 수 : " + databaseCount);
     }
 
     //출력된 테이블 뷰에서 튜플 더블 클릭시 해당 행의 리뷰 정보 출력

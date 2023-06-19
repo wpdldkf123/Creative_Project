@@ -46,6 +46,9 @@ public class Information_Playland {
     private TableColumn<?, ?> tc_playland_review;
 
     @FXML
+    private TableColumn<?, ?> tc_playland_reviewCount;
+
+    @FXML
     private ComboBox cb_information_Do;
 
     @FXML
@@ -59,6 +62,10 @@ public class Information_Playland {
 
     @FXML
     private TableView<reviewDTO> tv_selected_review;
+
+    @FXML
+    private Label lb_count_data;
+
 
     @FXML
     private TableView<weatherData> tv_information_weather;
@@ -92,8 +99,12 @@ public class Information_Playland {
         tc_playland_address.setCellValueFactory(new PropertyValueFactory<>("address"));
         tc_playland_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         tc_playland_score.setCellValueFactory(new PropertyValueFactory<>("score"));
+        tc_playland_reviewCount.setCellValueFactory(new PropertyValueFactory<>("reviewCount"));
 
         tv_information_playland.setItems(observablePlaylands);
+
+        int databaseCount = playlands.size();
+        lb_count_data.setText("조회된 관광지 수 : " + databaseCount);
     }
 
     //출력된 테이블 뷰에서 튜플 더블 클릭시 해당 행의 리뷰 정보 출력

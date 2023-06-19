@@ -30,7 +30,6 @@
                                         <MenuItem fx:id="menu_schedule" mnemonicParsing="false" onAction="#manage_schedule" text="일정 메모" />
                                         <MenuItem fx:id="menu_require_add" mnemonicParsing="false" onAction="#require_add" text="맛집 / 관광지 등록 요청" />
                                         <MenuItem fx:id="menu_require_modify" mnemonicParsing="false" onAction="#require_modify" text="맛집 / 관광지 수정/삭제 요청" />
-                                        <MenuItem fx:id="menu_recommend" mnemonicParsing="false" onAction="#view_recommend" text="지역별 맛집/관광지 추천" />
                                     </items>
                            <font>
                               <Font size="14.0" />
