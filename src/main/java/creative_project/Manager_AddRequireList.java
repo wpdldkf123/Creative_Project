@@ -80,7 +80,7 @@ public class Manager_AddRequireList {
               }
           });
           Tab selectedTab = tp_add_requireList.getSelectionModel().getSelectedItem();
-          handleTabSelection(selectedTab);
+            handleTabSelection(selectedTab);
     }
     private void handleTabSelection(Tab selectedTab) {
         if (selectedTab == tb_restaurant_require) {
@@ -92,7 +92,7 @@ public class Manager_AddRequireList {
         }
     }
     @FXML
-    void add_require(ActionEvent event) {
+        void add_require(ActionEvent event) {
         Tab selectTab = tp_add_requireList.getSelectionModel().getSelectedItem();
         if(selectTab == tb_restaurant_require) {
             openFXMLWindow("Manager_AddRestaurant.fxml");
